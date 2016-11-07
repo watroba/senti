@@ -9,7 +9,7 @@ Created on Oct 27, 2016
 #Highest pop: Pulaski, 382748
 #Lowest pop:  Calhoun, 5368
 def countylist():
-    #"key":("CountyName","CountySeatName",population,latTBA,longTBA),
+    #"key":("CountyName","CountySeatName",population,lat,long),
     #note: geoJSON uses a different format for coordinates (LON,LAT)
     dict = {"0":("Arkansas","De Witt",19019,34.2354,-91.2891),
             "1":("Ashley","Hamburg",21853,33.1566,-91.7539),
