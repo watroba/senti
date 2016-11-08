@@ -11,6 +11,8 @@ import io           #processing unicode from twitter
 from twython import Twython #google Twython
 from twython.exceptions import TwythonError #self explanatory
 from twython import TwythonStreamer #4streams
+import counties
+import collections
 
 #Code
 #appkeys are now stored
@@ -112,25 +114,25 @@ class Streamers(TwythonStreamer):   #parameter of TwythonStreamer type
         self.disconnect()           #autodisconnect to prevent ban
 
 #fn for queries (add dict parameter in for calls from main())
-def query(APP_KEY, APP_SECRET):     #query using oauth v.2
+def query(APP_KEY, APP_SECRET, Q, GEO):     #query using oauth v.2
     
     ACCESS_TOKEN = authrv2(APP_KEY, APP_SECRET) #get oauth v.2 access token
     qtwitter = Twython(APP_KEY,access_token=ACCESS_TOKEN)   #create twythonobj
     
     try:    #attempt following code
             #get tweets from given parameters
-        results = qtwitter.search(q ='tech',result_type ='recent',count = '100',geo='35.2951,-93.1387,1mi')
+        results = qtwitter.search(q =Q,result_type ='recent',count = '100',
+                                  lang='en',geo=GEO)  #GEO [lat,long,radius(mi/km)]
     except TwythonError as e:   #if error in search of TwythonError type:
         print(e)                #return error
     else:   #if successful, do following
-        d = io.open('data.dat','w',encoding='utf-8')    #open data, unicode frmt
-        for result in results['statuses']:              #iterate through result
-            print(result['text'])                       #print result
-            d.write(result['text'])                     #write result to file
-            d.write("\n")                               #write newline to file
-        d.close()                                       #close file
+        with io.open('data.dat','a+',encoding='utf-8') as d:    #unicode frmt
+            for result in results['statuses']:          #iterate through result
+                print(result['text'])                   #print result
+                d.write(result['text'])                 #write result to file
+                d.write("\n")                           #write newline to file
     
-def queryv1(APP_KEY, APP_SECRET):
+def queryv1(APP_KEY, APP_SECRET, Q, GEO):
     
     auth = authrv1(APP_KEY, APP_SECRET) #get oauth v.1 tokens
     OAUTH_TOKEN = auth[0]               #oauth token from auth tuple
@@ -140,16 +142,16 @@ def queryv1(APP_KEY, APP_SECRET):
     qtwitter = Twython(APP_KEY,APP_SECRET,OAUTH_TOKEN,OAUTH_TOKEN_SECRET)
 
     try:                        #attempt following code
-        results = qtwitter.search(q ='a+e+i+o+u',result_type ='recent',count = '100',geo='-93.1387,35.2951,,1mi')
+        results = qtwitter.search(q =Q,result_type ='recent',count = '100',
+                                  lang='en',geo=GEO)  #GEO [lat,long,radius(mi/km)]
     except TwythonError as e:   #if error of TwythonError type
         print(e)                #output error
     else:                       #if successful
-        d = io.open('data2.dat','w',encoding='utf-8')   #open data2 in unicode f
-        for result in results['statuses']:              #iterate through results
-            print(result['text'])                       #print text
-            d.write(result['text'])                     #write text to file
-            d.write("\n")                               #write newline
-        d.close()                                       #close file
+        with io.open('data2.dat','a+',encoding='utf-8') as d:    #unicode frmt
+            for result in results['statuses']:          #iterate through result
+                print(result['text'])                   #print result
+                d.write(result['text'])                 #write result to file
+                d.write("\n")                           #write newline to file
 
 #------------------------------------------------------------------------------
 #main fn
@@ -158,13 +160,29 @@ def main():
     keys = appkeys()
     APP_KEY = keys[0]
     APP_SECRET = keys[1]
+    
+    radius = 5.02
+    unit = 'mi'
+            
+    Q = 'a OR e OR i OR o OR u'
+    GEO = str(35.4406)+','+str(-93.0176)+','+str(radius)+unit
+
+    with io.open('data.dat','w+',encoding='utf-8') as d:
+        d.close()    
+    for key in counties.od:
+        lat = counties.od[key][3]
+        long = counties.od[key][4]
+        GEO = str(lat)+','+str(long)+','+str(radius)+unit
         
-    #call to run query instead
-    #query()
-    
-    #Twython oauth1 test
-    query(APP_KEY,APP_SECRET)
-    
+        with io.open('data.dat','a+',encoding='utf-8') as d:
+            d.write(counties.od[key][0]+':'+'\n')
+        
+        query(APP_KEY, APP_SECRET, Q, GEO)
+        
+   
+    #call to run query using oauth2 tokens
+    #query(APP_KEY,APP_SECRET,Q,GEO)
+   
 #call main() if not used as lib    
 if __name__== '__main__':
     main()
