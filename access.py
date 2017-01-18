@@ -161,27 +161,34 @@ def main():
     APP_KEY = keys[0]
     APP_SECRET = keys[1]
     
-    radius = 5.02
-    unit = 'mi'
-            
+    #area initialization
+    radius = 5.02   #avg radius of AR county
+    unit = 'mi'     #unit of miles
+    
+    #query setup and geo initialization
     Q = 'a OR e OR i OR o OR u'
     GEO = str(35.4406)+','+str(-93.0176)+','+str(radius)+unit
 
+    #clear data file
     with io.open('data.dat','w+',encoding='utf-8') as d:
-        d.close()    
+        d.close()   
+        
+    #query looping over counties in order alphabetically     
     for key in counties.od:
         lat = counties.od[key][3]
         long = counties.od[key][4]
         GEO = str(lat)+','+str(long)+','+str(radius)+unit
         
+        #print county name
         with io.open('data.dat','a+',encoding='utf-8') as d:
             d.write(counties.od[key][0]+':'+'\n')
         
+        #query 
         query(APP_KEY, APP_SECRET, Q, GEO)
         
-   
-    #call to run query using oauth2 tokens
-    #query(APP_KEY,APP_SECRET,Q,GEO)
+        with io.open('data.dat','a+',encoding='utf-8') as d:
+            d.write('-------'+'\n')
+            
    
 #call main() if not used as lib    
 if __name__== '__main__':
