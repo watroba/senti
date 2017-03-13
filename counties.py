@@ -12,6 +12,8 @@ import collections
     #"key":("CountyName","CountySeatName",population,lat,long),
     #note: geoJSON uses a different format for coordinates (LON,LAT)
 
+d2={"0":("Arkansas","De Witt",19019,34.2354,-91.2891)}
+
 d ={"0":("Arkansas","De Witt",19019,34.2354,-91.2891),
         "1":("Ashley","Hamburg",21853,33.1566,-91.7539),
         "2":("Baxter","Mountain Home",41513,36.3262,-92.3814),
@@ -162,5 +164,5 @@ od = collections.OrderedDict([('0', ('Arkansas', 'De Witt', 19019, 34.2354, -91.
              ('70', ('Van Buren', 'Clinton', 17295, 35.6266, -92.5396)), 
              ('71', ('Washington', 'Fayetteville', 203065, 35.9308, -94.1514)), 
              ('72', ('White', 'Searcy', 77076, 35.2901, -91.7539)), 
-             ('72', ('Woodruff', 'Augusta', 7260,35.1226,-91.1353)), 
-             ('73', ('Yell', 'Dardanelle', 22185, 35.0811, 93.3389))])
+             ('73', ('Woodruff', 'Augusta', 7260,35.1226,-91.1353)), 
+             ('74', ('Yell', 'Dardanelle', 22185, 35.0811, 93.3389))])
