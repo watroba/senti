@@ -30,24 +30,7 @@ def StopWordsFilter(tags):
     alteredStopWords = set(stopwords.words("english")) - omitFromStopWords
     alteredStopWords = alteredStopWords | punctuation
     
-    #Following stop words code segment for testing only
-    #print("Stop words: ")
-    #print(stopWords)
-    #print("\n\n")
-
-    #print("Altered stop words: ")
-    #print(alteredStopWords)
-    #print("\n\n")
-    
-
     try:
-        
-        #ftags1 = [] #Empty list for now
-        #for i in tags1:                 
-        #        if i not in alteredStopWords:
-        #            ftags1.append(i)
-
-        #Filtering stop words from tags (same as above in one line)
         ftags = [i for i in tags if not i in alteredStopWords]
         return ftags
 
