@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 '''
 Created on Mar 29, 2017
 
@@ -6,7 +8,7 @@ Created on Mar 29, 2017
 import sys                                                                      #for system stuff
 import time                                                                     #for wait() fn
 import io   
-from access.py import TwyAccess
+from access import TwyAccess
 import counties
 import collections
 from CleanAnalysis import (POS_tagging,StopWordsFilter,tagger,expandContractions)
