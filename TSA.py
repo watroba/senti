@@ -112,7 +112,7 @@ if __name__== '__main__':
                 long = counties.od[key][4]
                 GEO = str(lat)+','+str(long)+','+str(radius)+unit
         
-                print(key)
+                #print(key)
                 results = twya.query(Q, GEO)
                 for result in results['statuses']:
                     tagged =(POS_tagging(StopWordsFilter(tagger(
