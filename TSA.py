@@ -125,14 +125,14 @@ if __name__== '__main__':
                             Aavg+=A
                             Davg+=D
                             i+=1
-                            print(i)
+                            #print(i)
         
                 Tavg[key]=Vavg/i,Aavg/i,Davg/i
         
             with open('countyVADdata.csv','a+',newline='') as csvfile:
                 cout = csv.writer(csvfile,dialect='excel')
                 for key in counties.od:
-                    print(key+':'+str(Tavg[key][0])+' '+str(Tavg[key][1])+' '+
+                    #print(key+':'+str(Tavg[key][0])+' '+str(Tavg[key][1])+' '+
                           str(Tavg[key][2])+'\n')
                     cout.writerow([time.time(),key,Tavg[key][0],Tavg[key][1],
                                    Tavg[key][2]])
