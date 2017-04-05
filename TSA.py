@@ -133,7 +133,7 @@ if __name__== '__main__':
                 cout = csv.writer(csvfile,dialect='excel')
                 for key in counties.od:
                     #print(key+':'+str(Tavg[key][0])+' '+str(Tavg[key][1])+' '+
-                          str(Tavg[key][2])+'\n')
+                    #      str(Tavg[key][2])+'\n')
                     cout.writerow([time.time(),key,Tavg[key][0],Tavg[key][1],
                                    Tavg[key][2]])
             #end rest of code
