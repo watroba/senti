@@ -37,7 +37,7 @@ def StopWordsFilter(tags):
     except Exception as e:
         print(str(e))
 
-
+'''
 class exampleTweet:         #Class of example Tweets
     def __init__(self,ex):  #"Constructor class", ready for more arguments if necessary
         self.ex = ex        
@@ -69,7 +69,7 @@ class exampleTweet:         #Class of example Tweets
 #for i in ftags1:
 #   print(lmtz.lemmatize(i))
 #print(ftags1)
-
+'''
 
 def POS_tagging(untagged):  #Tagging tokens with parts of speech in ftags1
     try:
@@ -82,6 +82,7 @@ def POS_tagging(untagged):  #Tagging tokens with parts of speech in ftags1
             print(str(e))
             
 
+'''
 #The potential exists to remove parts of speech deemed unessecarry for sentiment evaluation
 
 #lemmatization would ideally go here
@@ -150,7 +151,7 @@ def POS_tagging(untagged):  #Tagging tokens with parts of speech in ftags1
 #        return tag_sentence
 
 # ########################################################################################################################
-
+'''
 contractions = {
   "ain't": "am not",
   "aren't": "are not",
@@ -279,71 +280,67 @@ def expandContractions(tweets):
     def replace(match):
         return contractions[match.group(0)]
     return c_re.sub(replace, tweets)
+'''
+if __name__ == '__main__':
+    tweet1 = "This is the first example tweet. This tweet is an unhappy tweet. It contains some examples of sadness. Test contractions: can't, won't, wouldn't."
+    tweet2 = "This is the second example tweet. This is a very happy tweet. It contains some examples of joyfullness."
+
+    print("Raw example tweets: ")
+    print(tweet1)  #Testing example tweets
+    print(tweet2)
+    print("\n\n")
+
+    
+    tweet1 = tweet1.lower()
+    tweet2 = tweet2.lower()
+    print("Tweets with all lowercase letters: ")
+    print (tweet1)
+    print (tweet2)
+    print ("\n\n")
 
 
-def main():
-    if __name__ == '__main__':
+    tweet1 = expandContractions(tweet1)
+    tweet2 = expandContractions(tweet2)
+    print("Tweets with expanded contractions: ")
+    print(tweet1)
+    print(tweet2)
+    print("\n\n")
+    
 
-        tweet1 = "This is the first example tweet. This tweet is an unhappy tweet. It contains some examples of sadness. Test contractions: can't, won't, wouldn't."
-        tweet2 = "This is the second example tweet. This is a very happy tweet. It contains some examples of joyfullness."
-
-        print("Raw example tweets: ")
-        print(tweet1)  #Testing example tweets
-        print(tweet2)
-        print("\n\n")
-
-        
-        tweet1 = tweet1.lower()
-        tweet2 = tweet2.lower()
-        print("Tweets with all lowercase letters: ")
-        print (tweet1)
-        print (tweet2)
-        print ("\n\n")
+    tags1 = tagger(tweet1)
+    tags2 = tagger(tweet2)
+    print("Tokenized Tweets: ")   #Tokenizing tweet2
+    print(tags1)   #Testing tokenizer
+    print(tags2)
+    print("\n\n")
 
 
-        tweet1 = expandContractions(tweet1)
-        tweet2 = expandContractions(tweet2)
-        print("Tweets with expanded contractions: ")
-        print(tweet1)
-        print(tweet2)
-        print("\n\n")
-        
-
-        tags1 = tagger(tweet1)
-        tags2 = tagger(tweet2)
-        print("Tokenized Tweets: ")   #Tokenizing tweet2
-        print(tags1)   #Testing tokenizer
-        print(tags2)
-        print("\n\n")
+    ftags1 = StopWordsFilter(tags1)
+    ftags2 = StopWordsFilter(tags2)
+    print("Tweets with stop words romoved:")
+    print(ftags1)
+    print(ftags2)
+    print("\n\n")
 
 
-        ftags1 = StopWordsFilter(tags1)
-        ftags2 = StopWordsFilter(tags2)
-        print("Tweets with stop words romoved:")
-        print(ftags1)
-        print(ftags2)
-        print("\n\n")
-
-
-        tagged1 = POS_tagging(ftags1)
-        tagged2 = POS_tagging(ftags2)
-        print("Parts of speech tagged words: ")
-        print(tagged1)
-        print(tagged2)
-        print("\n\n\n\n")
+    tagged1 = POS_tagging(ftags1)
+    tagged2 = POS_tagging(ftags2)
+    print("Parts of speech tagged words: ")
+    print(tagged1)
+    print(tagged2)
+    print("\n\n\n\n")
 
 
 
-        
+    
 
 
-        #dictTagger = DictionaryTagger([ 'dicts/happy.yml', 'dicts/sad.yml'])
+    #dictTagger = DictionaryTagger([ 'dicts/happy.yml', 'dicts/sad.yml'])
 
-        #dictTagged = dictTagger.tag(tagged)
+    #dictTagged = dictTagger.tag(tagged)
 
-        
-        #print("Dictionary-tagged tweets: ")
-        #pprint(dictTagged)
+    
+    #print("Dictionary-tagged tweets: ")
+    #pprint(dictTagged)
+'''
 
-
-main()

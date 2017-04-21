@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="Images">
+    <file>1f60c.relaxedsvg.png</file>
+    <file>1f61edisdainful.png</file>
+    <file>1f601exuberant.png</file>
+    <file>1f605dependent.png</file>
+    <file>1f610docile.png</file>
+    <file>1f616anxious.png</file>
+    <file>1f621hostile.png</file>
+    <file>1f634bored.png</file>
+    <file>arnames.png</file>
+    <file>arnames2.png</file>
+  </qresource>
+</RCC>
