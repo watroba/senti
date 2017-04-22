@@ -9,7 +9,7 @@ import sys                                                                      
 import time                                                                     #for wait() fn
 import io   
 from access import TwyAccess
-import gui
+import gui2
 import counties
 import collections
 from CleanAnalysis import (POS_tagging,StopWordsFilter,tagger,expandContractions)
@@ -78,7 +78,7 @@ class worker (QObject):
                           (self.Vavg/self.i,self.Aavg/self.i,self.Davg/self.i))
                 QThread.sleep(1)
 
-class TSAprogram(QtWidgets.QMainWindow, gui.Ui_MainWindow):
+class TSAprogram(QtWidgets.QMainWindow, gui2.Ui_MainWindow):
     twya = TwyAccess(2)
     def __init__(self, twya, lem, conv, Q, radius, unit):
         super(self.__class__, self).__init__()
