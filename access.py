@@ -123,22 +123,19 @@ class TwyAccess(object):
         
         ACCESS_TOKEN = self.authrv2() 
         qtwitter = Twython(self.__APP_KEY,access_token=ACCESS_TOKEN) 
+        for i in range(0,10):
+            try:    #attempt following code
+                    #get tweets from given parameters
+                results = qtwitter.search(q =Q,result_type ='recent',count = '100',
+                                          lang='en',geo=GEO)                        #GEO [lat,long,radius(mi/km)]
+            except TwythonError as e:   
+                if e.error_code == 500:
+                    time.sleep(10*i)
+                print(e)                
+            else:   
+                return results
         
-        try:    #attempt following code
-                #get tweets from given parameters
-            results = qtwitter.search(q =Q,result_type ='recent',count = '100',
-                                      lang='en',geo=GEO)                        #GEO [lat,long,radius(mi/km)]
-        except TwythonError as e:   
-            print(e)                
-        else:   
-            return results
-            '''
-            with io.open('data.dat','a+',encoding='utf-8') as d:                #unicode frmt
-                for result in results['statuses']:                              #iterate through result
-#                    print(result['text'])                                       #print result #testing only
-                    d.write(result['text'])                                     #write result to file
-                    d.write("\n")                                               #write newline to file
-            '''
+
     def queryv1(self, Q, GEO):
         
         auth = self.authrv1()                                                   #get oauth v.1 tokens

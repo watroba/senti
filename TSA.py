@@ -6,7 +6,7 @@ Created on Mar 29, 2017
 @author: Joseph
 '''
 import sys                                                                      #for system stuff
-import time                                                                     #for wait() fn
+#import time                                                                     #for wait() fn
 import io   
 from access import TwyAccess
 import gui
@@ -16,11 +16,11 @@ from CleanAnalysis import (POS_tagging,StopWordsFilter,tagger,expandContractions
 from nltk.stem import WordNetLemmatizer                                         #Multiple options
 from nltk.corpus import wordnet
 from ratings import csvd
-import csv
+#import csv
 from logging import raiseExceptions
 from PyQt5 import QtGui, QtWidgets
-from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot, QObject
-from nltk.app.wordnet_app import lemma_property
+from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot, QObject, Qt
+#from nltk.app.wordnet_app import lemma_property
 
 class worker (QObject):
    
@@ -79,7 +79,9 @@ class worker (QObject):
                 QThread.sleep(1)
 
 class TSAprogram(QtWidgets.QMainWindow, gui.Ui_MainWindow):
+    
     twya = TwyAccess(2)
+    
     def __init__(self, twya, lem, conv, Q, radius, unit):
         super(self.__class__, self).__init__()
         self.Q = Q
@@ -89,7 +91,6 @@ class TSAprogram(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         self.unit = unit
         
         self.setupUi(self)
-        #self.keyPressEvent.connect(sys.exit())
         
         self.thread = QThread()
         self.w = worker(twya, lem, conv, Q, radius, unit)        
@@ -98,6 +99,12 @@ class TSAprogram(QtWidgets.QMainWindow, gui.Ui_MainWindow):
         self.thread.started.connect(self.w.run)
         
         self.thread.start()
+    
+    def keyPressEvent(self, event):                                             #function to allow prog exit by ESC
+        key = event.key()
+        if key == Qt.Key_Escape:
+            sys.exit()
+        super(TSAprogram,self).keyPressEvent(event)
     
     def moody(self,VAD,VAD_AVG):
         #print('moody')
