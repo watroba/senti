@@ -123,15 +123,14 @@ class TwyAccess(object):
         
         ACCESS_TOKEN = self.authrv2() 
         qtwitter = Twython(self.__APP_KEY,access_token=ACCESS_TOKEN) 
-        for i in range(0,10):
+        for i in range(1,10):
             try:    #attempt following code
                     #get tweets from given parameters
                 results = qtwitter.search(q =Q,result_type ='recent',count = '100',
                                           lang='en',geo=GEO)                        #GEO [lat,long,radius(mi/km)]
             except TwythonError as e:   
-                if e.error_code == 500:
-                    time.sleep(10*i)
-                print(e)                
+                time.sleep(10*i)
+                #print(e)                
             else:   
                 return results
         

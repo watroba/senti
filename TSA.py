@@ -103,6 +103,8 @@ class TSAprogram(QtWidgets.QMainWindow, gui.Ui_MainWindow):
     def keyPressEvent(self, event):                                             #function to allow prog exit by ESC
         key = event.key()
         if key == Qt.Key_Escape:
+            
+            #save file
             sys.exit()
         super(TSAprogram,self).keyPressEvent(event)
     
@@ -164,71 +166,7 @@ def conv(treebank_tag):
     else:
         return wordnet.NOUN
     
-''' #find more info @ ftp://smtp.infomus.org/pub/BiologicalMotion/Survey-Karg/Mehrabian%20-%20Pleasure-Arousal.Dominance%20A%20General%20Framework%20for%20Describing%20and%20Measuring%20Individual%20Differences%20in%20Temperament.pdf
-def moody(VAD,VAD_AVG):
-    v,a,d=VAD
-    vc,ac,dc=VAD_AVG
-    
-    if(v>=vc):                                                                  #positive emotion (high valence)
-        if(a>=ac):                                                              #excited (high arousal)
-            if(d>=dc):                                                          #in control (high dominance)
-                #return 'exuberant'                                              #happy!
-                #return 1 #(for signals/slots)
-                return ":/Images/1f601exuberant.png"
-            elif(d<dc):                                                         #not in control
-                #return 'dependent'                                              #opposite of disdainful
-                #return 2 #(s/s)                                                #"frequently seeks the sympathy, protection,love,advice,and reasuurance of other people
-                return ":/Images/1f605dependent.png"
-            else:
-                return 'ERROR'
-                #return 0 #(s/s)
-        elif(a<ac):
-            if(d>=dc):
-                #return 'relaxed'
-                #return 3 #(s/s)
-                return ":/Images/1f60c.relaxedsvg.png"
-            elif(d<dc):
-                #return 'docile'
-                #return 4 #(s/s)
-                return ":/Images/1f610docile.png"
-            else:
-                return 'ERROR'
-                #return 0 #(s/s)
-        else:
-            return 'ERROR'
-            #return 0 #(s/s)
-    elif(v<vc):
-        if(a>=ac):
-            if(d>=dc):
-                #return 'hostile'
-                #return 5 #(s/s)
-                return ":/Images/1f621hostile.png"
-            elif(d<dc):
-                #return 'anxious'
-                #return 6 #(s/s)
-                return ":/Images/1f616anxious.png"
-            else:
-                return 'ERROR'
-                #return 0  #(s/s)
-        elif(a<ac):
-            if(d>=dc):
-                #return 'disdainful'                                             #shame, humiliation,
-                #return 7 #(s/s)
-                return ":/Images/1f61edisdainful.png"
-            elif(d<dc):
-                #return 'bored'
-                #return 8 #(s/s)
-                return ":/Images/1f634bored.png"
-            else:
-                return 'ERROR'
-                #return 0 #(s/s)
-        else:
-            return 'ERROR'
-            #return 0 #(s/s)
-    else:
-        return 'ERROR'
-        #return 0  #(s/s)
-'''    
+
 def main():
     twya = TwyAccess(2)                                                         #TwyAccess class init
     lem = WordNetLemmatizer()                                                   #Lemmatizer class init
